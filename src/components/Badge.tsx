@@ -51,7 +51,7 @@ export const Badge = (props: Props) => {
       "text-align": 'center',
       color: props.poweredByTextColor ?? defaultTextColor,
       "background-color": props.badgeBackgroundColor ?? '#ffffff'
-    }}>Appraised by
+    }}>Boosted by
       <a
         ref={liteBadge}
         href={'https://simarpreet.com'}
