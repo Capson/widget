@@ -54,7 +54,7 @@ export const Badge = (props: Props) => {
     }}>Appraised by
       <a
         ref={liteBadge}
-        href={'https://flowiseai.com'}
+        href={'https://simarpreet.com'}
         target="_blank"
         rel="noopener noreferrer"
         class="lite-badge"
