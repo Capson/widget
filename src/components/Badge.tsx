@@ -51,17 +51,17 @@ export const Badge = (props: Props) => {
       "text-align": 'center',
       color: props.poweredByTextColor ?? defaultTextColor,
       "background-color": props.badgeBackgroundColor ?? '#ffffff'
-    }}>Made with ❤️ by
+    }}>Powered by 
       <a
         ref={liteBadge}
-        href={'https://google.com'}
+        href={'https://cloozo.com'}
         target="_blank"
         rel="noopener noreferrer"
         class="lite-badge"
         id="lite-badge"
         style={{ "font-weight": 'bold', color: props.poweredByTextColor ?? defaultTextColor }}
       >
-        <span> Simarpreet</span>
+        <span> Cloozo</span>
       </a>
     </span>
   )
