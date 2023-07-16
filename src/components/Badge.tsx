@@ -19,7 +19,7 @@ export const Badge = (props: Props) => {
         if (
           'id' in removedNode &&
           liteBadge &&
-          removedNode.id == 'lite-badge'
+          removedNode.id === 'lite-badge'
         ) {
           console.log("Sorry, you can't remove the brand 😅")
           props.botContainer?.append(liteBadge)
@@ -35,34 +35,45 @@ export const Badge = (props: Props) => {
       subtree: false,
       childList: true,
     })
-  })
 
-  onCleanup(() => {
-    if (observer) observer.disconnect()
-  })
+    // Image element creation and insertion into DOM.
+    const imageElement = document.createElement('img')
+    imageElement.src = imageUrl
+    imageElement.alt = "Top Image"
+    
+    if (props.botContainer.firstChild){
+       props.botContainer.insertBefore(imageElement, props.botContainer.firstChild);
+     } else{
+       props.botContainer.appendChild(imageElement)
+     }
+     
+   })
 
-  return (
-    <span style={{
-      "font-size": '13px',
-      position: 'absolute',
-      bottom:0,
-      padding:'10px',
-      margin:'auto',
-      width:'100%',
-      "text-align":'center',
+   onCleanup(() => {
+     if (observer) observer.disconnect()
+   })
+
+   return (
+     <span style={{
+       fontSize:'13px',
+       position:'absolute',
+       bottom:0,
+       padding:'10px',
+       margin:'auto',
+       width:'100%',
+       textAlign:'center',
        color: props.poweredByTextColor ?? defaultTextColor,
-       "background-color": props.badgeBackgroundColor ?? '#ffffff'
+       backgroundColor: props.badgeBackgroundColor ?? '#ffffff'
      }}>
-     <img src={imageUrl} alt="Top Image" style={{position:"absolute", top:"0"}} />
      Powered by 
      <a
         ref={liteBadge}
         href={'https://cloozo.com'}
         target="_blank"
         rel="noopener noreferrer"
-        class="lite-badge"
+        className="lite-badge"
         id="lite-badge"
-        style={{ "font-weight":'bold', color: props.poweredByTextColor ?? defaultTextColor}}
+        style={{ fontWeight:'bold', color: props.poweredByTextColor ?? defaultTextColor }}
         
      >
          <span> Cloozo</span>
