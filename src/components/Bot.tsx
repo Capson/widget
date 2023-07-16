@@ -282,7 +282,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                {typeof props.chatflowConfig?.imagePath === 'string' &&
                     <img src={props.chatflowConfig.imagePath} alt='Chat Icon' style={{width: '100px', height: '50px'}}/>
                 }
-               <div class="flex w-full h-full justify-center" style={{marginTop: '-50px'}}>
+               <div class="flex w-full h-full justify-center" style={{marginTop: '-60px'}}>
                     <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
                         <For each={[...messages()]}>
                             {(message, index) => (
