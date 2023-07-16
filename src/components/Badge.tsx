@@ -45,7 +45,7 @@ export const Badge = (props: Props) => {
       "font-size": '13px',
       position: 'absolute',
       bottom: 0,
-      padding: '10px',
+      padding: '20px',
       margin: 'auto',
       width: '100%',
       "text-align": 'center',
