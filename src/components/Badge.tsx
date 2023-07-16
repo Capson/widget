@@ -7,7 +7,7 @@ type Props = {
 }
 
 const defaultTextColor = '#303235'
-const imageUrl = 'https://example.com/image.jpg' // replace with your image URL
+const imageUrl = 'https://i.ibb.co/HDpVRwT/ddd.png' // replace with your image URL
 
 export const Badge = (props: Props) => {
   let liteBadge: HTMLAnchorElement | undefined
