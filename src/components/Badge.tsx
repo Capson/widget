@@ -7,6 +7,7 @@ type Props = {
 }
 
 const defaultTextColor = '#303235'
+const imageUrl = 'https://example.com/image.jpg' // replace with your image URL
 
 export const Badge = (props: Props) => {
   let liteBadge: HTMLAnchorElement | undefined
@@ -44,25 +45,28 @@ export const Badge = (props: Props) => {
     <span style={{
       "font-size": '13px',
       position: 'absolute',
-      bottom: 0,
-      padding: '10px',
-      margin: 'auto',
-      width: '100%',
-      "text-align": 'center',
-      color: props.poweredByTextColor ?? defaultTextColor,
-      "background-color": props.badgeBackgroundColor ?? '#ffffff'
-    }}>Powered by 
-      <a
+      bottom:0,
+      padding:'10px',
+      margin:'auto',
+      width:'100%',
+      "text-align":'center',
+       color: props.poweredByTextColor ?? defaultTextColor,
+       "background-color": props.badgeBackgroundColor ?? '#ffffff'
+     }}>
+     <img src={imageUrl} alt="Top Image" style={{position:"absolute", top:"0"}} />
+     Powered by 
+     <a
         ref={liteBadge}
         href={'https://cloozo.com'}
         target="_blank"
         rel="noopener noreferrer"
         class="lite-badge"
         id="lite-badge"
-        style={{ "font-weight": 'bold', color: props.poweredByTextColor ?? defaultTextColor }}
-      >
-        <span> Cloozo</span>
-      </a>
-    </span>
-  )
+        style={{ "font-weight":'bold', color: props.poweredByTextColor ?? defaultTextColor}}
+        
+     >
+         <span> Cloozo</span>
+     </a>
+   </span>
+ )
 }
