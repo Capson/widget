@@ -278,7 +278,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     return (
         <>
-            <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
+            <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class} style={{height: '700px'}}>
                {typeof props.chatflowConfig?.imagePath === 'string' &&
                     <img src={props.chatflowConfig.imagePath} alt='Chat Icon' style={{width: '60px', height: '60px'}}/>
                 }
