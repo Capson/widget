@@ -278,13 +278,12 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     return (
         <>
-            <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class} style={{height: '1000px'}}>
+            <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
                {typeof props.chatflowConfig?.imagePath === 'string' &&
                     <img src={props.chatflowConfig.imagePath} alt='Chat Icon' style={{width: '60px', height: '60px'}}/>
                 }
                <div class="flex w-full h-full justify-center">
-                    <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-0 relative scrollable-container chatbot-chat-view scroll-smooth">
-
+                    <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
                         <For each={[...messages()]}>
                             {(message, index) => (
                                 <>
