@@ -28,7 +28,9 @@ export const Bubble = (props: BubbleProps) => {
     return (
         <>
             <style>{styles}</style>
-            <BubbleButton {...bubbleProps.theme?.button} toggleBot={toggleBot} isBotOpened={isBotOpened()} />
+            <BubbleButton {...bubbleProps.theme?.button} toggleBot={toggleBot} isBotOpened={isBotOpened()} 
+            style={{ width: '200px', height: '200px' }}
+            />
             <div
                 part='bot'
                 style={{
