@@ -19,7 +19,7 @@ export const BubbleButton = (props: Props) => {
             onClick={() => props.toggleBot()}
             class={
                 `fixed shadow-md rounded-full hover:scale-110 active:scale-95 transition-transform duration-200 flex justify-center items-center animate-fade-in` +
-                (props.size === 'large' ? ' w-16 h-16' : ' w-12 h-12')
+                (props.size === 'large' ? ' w-20 h-20' : ' w-20 h-20')
             }
             style={{
                 'background-color': props.backgroundColor ?? defaultButtonColor,
@@ -46,7 +46,7 @@ export const BubbleButton = (props: Props) => {
             <Show when={props.customIconSrc}>
                 <img
                     src={props.customIconSrc}
-                    class={'rounded-full object-cover' + (props.isBotOpened ? 'scale-0 opacity-0' : 'scale-100 opacity-100') + ' w-20 h-20'}
+                    class={'rounded-full object-cover' + (props.isBotOpened ? 'scale-0 opacity-0' : 'scale-100 opacity-100') + ' w-18 h-18'}
                     alt='Bubble button icon'
                     style={{ 'object-fit': 'cover', 'border-radius': '50%' }}
                 />
