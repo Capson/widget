@@ -46,7 +46,7 @@ export const BubbleButton = (props: Props) => {
             <Show when={props.customIconSrc}>
                 <img
                     src={props.customIconSrc}
-                    class={'rounded-full object-cover' + (props.isBotOpened ? 'scale-0 opacity-0' : 'scale-100 opacity-100') + ' w-100 h-100'}
+                    class={'rounded-full object-cover' + (props.isBotOpened ? 'scale-0 opacity-0' : 'scale-100 opacity-100') + ' w-80 h-80'}
                     alt='Bubble button icon'
                     style={{ 'object-fit': 'cover', 'border-radius': '50%' }}
                 />
