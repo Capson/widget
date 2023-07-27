@@ -23,18 +23,27 @@ export const Bubble = (props: BubbleProps) => {
         setIsBotOpened(false)
     }
     const [isButtonClicked, setIsButtonClicked] = createSignal(false)
+    const [buttonPosition, setButtonPosition] = createSignal({bottom: '20px', right: '20px'})
+
     const toggleBot = () => {
         setIsButtonClicked(true)
         isBotOpened() ? closeBot() : openBot()
     }
+    onMount(() => {
+        const button = document.querySelector('button[part="button"]');
+        if(button) {
+            const { bottom, right } = button.getBoundingClientRect();
+            setButtonPosition({bottom: `${window.innerHeight - bottom + 400}px`, right: `${right}px`});
+        }
+    });
 
     return (
         <>
             <style>{styles}</style>
             <Show when={!isButtonClicked()}>
                 <div 
-                    class="fixed bottom-24 right-20 text-center"
-                    style={{'bottom': props.theme?.button?.size === 'large' ? '60px' : '56px'}}
+                    class="fixed text-center"
+                    style={buttonPosition()}
                 >
                     Hello
                 </div>
