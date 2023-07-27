@@ -24,7 +24,7 @@ export const Bubble = (props: BubbleProps) => {
     const closeBot = () => {
         setIsBotOpened(false)
     }
-    const [isMessageVisible, setIsMessageVisible] = createSignal(true)
+    const [isMessageVisible, setIsMessageVisible] = createSignal(false)
 
     const [isButtonClicked, setIsButtonClicked] = createSignal(false)
     const [buttonPosition, setButtonPosition] = createSignal({bottom: '110px', right: '50px'})
@@ -44,12 +44,8 @@ export const Bubble = (props: BubbleProps) => {
             const { bottom, right } = button.getBoundingClientRect();
             setButtonPosition({bottom: `${window.innerHeight - bottom + 400}px`, right: `${right}px`});
         }
-        setTimeout(() => {
-            if(bubbleProps.theme?.chatWindow?.welcomeMessage) {
-                setIsMessageVisible(true);
-            }
-        }, 6000);
-    });
+        setTimeout(() => setIsMessageVisible(true), 4000);
+         });
 
     return (
         <>
