@@ -44,6 +44,11 @@ export const Bubble = (props: BubbleProps) => {
             const { bottom, right } = button.getBoundingClientRect();
             setButtonPosition({bottom: `${window.innerHeight - bottom + 400}px`, right: `${right}px`});
         }
+        setTimeout(() => {
+            if(bubbleProps.theme?.chatWindow?.welcomeMessage) {
+                setIsMessageVisible(true);
+            }
+        }, 2000);
     });
 
     return (
