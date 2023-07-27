@@ -4,7 +4,7 @@ import { BubbleButton } from './BubbleButton'
 import { BubbleParams } from '../types'
 import { Bot, BotProps } from '../../../components/Bot'
 
-export type BubbleProps = BotProps & BubbleParams & {startMsg: string}
+export type BubbleProps = BotProps & BubbleParams 
 
 export const Bubble = (props: BubbleProps) => {
 
