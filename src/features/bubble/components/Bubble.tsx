@@ -4,7 +4,7 @@ import { BubbleButton } from './BubbleButton'
 import { BubbleParams } from '../types'
 import { Bot, BotProps } from '../../../components/Bot'
 
-export type BubbleProps = BotProps & BubbleParams 
+export type BubbleProps = BotProps & BubbleParams & {startMsg: string}
 
 export const Bubble = (props: BubbleProps) => {
 
@@ -80,8 +80,10 @@ export const Bubble = (props: BubbleProps) => {
                 }
             >
                 <Show when={isBotStarted()}>
-                    <Bot
+
                         startMsg={props.startMsg}
+                    <Bot
+                       
                         badgeBackgroundColor={bubbleProps.theme?.chatWindow?.backgroundColor}
                         welcomeMessage={bubbleProps.theme?.chatWindow?.welcomeMessage}
                         poweredByTextColor={bubbleProps.theme?.chatWindow?.poweredByTextColor}
