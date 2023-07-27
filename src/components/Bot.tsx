@@ -29,7 +29,6 @@ export type BotProps = {
     poweredByTextColor?: string
     badgeBackgroundColor?: string
     fontSize?: number
-    notificationMessage?: string;
     
 }
 
