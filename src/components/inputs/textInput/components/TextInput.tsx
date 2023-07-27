@@ -39,6 +39,12 @@ export const TextInput = (props: Props) => {
         if (!isMobile() && inputRef) inputRef.focus()
     })
 
+    const handlePredefinedQuestionClick = (question: string) => {
+        setInputValue(question)
+        inputRef?.focus()
+    }
+
+
     return (
         <div
             class={'flex items-end justify-between chatbot-input'}
@@ -56,6 +62,16 @@ export const TextInput = (props: Props) => {
             }}
             onKeyDown={submitWhenEnter}
         >
+            <div class="flex">
+                <div
+                    class="border border-gray-200 p-2 m-2 text-sm cursor-pointer"
+                    onClick={() => handlePredefinedQuestionClick('What is cloozo?')}
+                >
+                    What is cloozo?
+                </div>
+                {/* Add more predefined questions here */}
+            </div>
+
             <ShortTextInput
                 ref={inputRef as HTMLInputElement}
                 onInput={handleInput}
