@@ -22,13 +22,20 @@ export const Bubble = (props: BubbleProps) => {
     const closeBot = () => {
         setIsBotOpened(false)
     }
+    const [isMessageVisible, setIsMessageVisible] = createSignal(true)
+
     const [isButtonClicked, setIsButtonClicked] = createSignal(false)
-    const [buttonPosition, setButtonPosition] = createSignal({bottom: '100px', right: '50px'})
+    const [buttonPosition, setButtonPosition] = createSignal({bottom: '120px', right: '60px'})
 
     const toggleBot = () => {
         setIsButtonClicked(true)
         isBotOpened() ? closeBot() : openBot()
     }
+
+    const removeMessage = () => {
+        setIsMessageVisible(false)
+    }
+
     onMount(() => {
         const button = document.querySelector('button[part="button"]');
         if(button) {
@@ -40,12 +47,15 @@ export const Bubble = (props: BubbleProps) => {
     return (
         <>
             <style>{styles}</style>
-            <Show when={!isButtonClicked()}>
+            <Show when={!isButtonClicked() && isMessageVisible()}>
                 <div 
-                    class="fixed text-center"
+                    class="fixed text-center border-black border-2 p-2"
                     style={buttonPosition()}
                 >
                     Hello
+                    <svg onClick={removeMessage} class="h-6 w-6 inline-block float-right cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://img.icons8.com/ios/50/cancel.png">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                 </div>
             </Show>
             <BubbleButton {...bubbleProps.theme?.button} toggleBot={toggleBot} isBotOpened={isBotOpened()} 
