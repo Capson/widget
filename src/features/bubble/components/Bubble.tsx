@@ -4,7 +4,7 @@ import { BubbleButton } from './BubbleButton'
 import { BubbleParams } from '../types'
 import { Bot, BotProps } from '../../../components/Bot'
 
-export type BubbleProps = BotProps & BubbleParams & { startMsg: string }
+export type BubbleProps = BotProps & BubbleParams & {startMsg: string}
 
 export const Bubble = (props: BubbleProps) => {
 
@@ -64,6 +64,7 @@ export const Bubble = (props: BubbleProps) => {
             <div
                 part='bot'
                 style={{
+
                     height: bubbleProps.theme?.chatWindow?.height ? `${bubbleProps.theme?.chatWindow?.height.toString()}px` : 'calc(100% - 100px)',
                     transition: 'transform 200ms cubic-bezier(0, 1.2, 1, 1), opacity 150ms ease-out',
                     'transform-origin': 'bottom right',
@@ -80,6 +81,7 @@ export const Bubble = (props: BubbleProps) => {
             >
                 <Show when={isBotStarted()}>
                     <Bot
+                        startMsg={props.startMsg}
                         badgeBackgroundColor={bubbleProps.theme?.chatWindow?.backgroundColor}
                         welcomeMessage={bubbleProps.theme?.chatWindow?.welcomeMessage}
                         poweredByTextColor={bubbleProps.theme?.chatWindow?.poweredByTextColor}
@@ -90,6 +92,7 @@ export const Bubble = (props: BubbleProps) => {
                         chatflowid={props.chatflowid}
                         chatflowConfig={props.chatflowConfig}
                         apiHost={props.apiHost} />
+                        
                 </Show>
             </div>
         </>
