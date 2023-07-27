@@ -25,7 +25,7 @@ export const Bubble = (props: BubbleProps) => {
     const [isMessageVisible, setIsMessageVisible] = createSignal(true)
 
     const [isButtonClicked, setIsButtonClicked] = createSignal(false)
-    const [buttonPosition, setButtonPosition] = createSignal({bottom: '120px', right: '60px'})
+    const [buttonPosition, setButtonPosition] = createSignal({bottom: '110px', right: '50px'})
 
     const toggleBot = () => {
         setIsButtonClicked(true)
@@ -53,7 +53,7 @@ export const Bubble = (props: BubbleProps) => {
                     style={{...buttonPosition(), borderColor: '#D1D5DB', borderWidth: '1px'}}
                 >
                     Hello, welcome to Cloozo 👋. How can we assist you today 😃
-                    <svg onClick={removeMessage} class="h-6 w-6 ml-2 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://img.icons8.com/material-outlined/24/cancel--v1.png" style={{position: 'absolute', right: '-20px'}}>
+                    <svg onClick={removeMessage} class="h-6 w-6 ml-2 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://img.icons8.com/material-outlined/24/cancel--v1.png" style={{position: 'absolute', right: '-30px'}}>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </div>
