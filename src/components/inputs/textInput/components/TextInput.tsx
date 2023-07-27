@@ -62,7 +62,7 @@ export const TextInput = (props: Props) => {
             }}
             onKeyDown={submitWhenEnter}
         >
-            <div class="flex">
+            <div class="flex flex-wrap items-center">
                 <div
                     class="border border-gray-200 p-2 m-2 text-sm cursor-pointer"
                     onClick={() => handlePredefinedQuestionClick('What is cloozo?')}
@@ -71,6 +71,7 @@ export const TextInput = (props: Props) => {
                 </div>
                 {/* Add more predefined questions here */}
             </div>
+            <div class="flex flex-grow">
 
             <ShortTextInput
                 ref={inputRef as HTMLInputElement}
@@ -78,10 +79,20 @@ export const TextInput = (props: Props) => {
                 value={inputValue()}
                 fontSize={props.fontSize}
                 placeholder={props.placeholder ?? 'Type your question'}
+                style={{
+                    'background-color': props.backgroundColor ?? defaultBackgroundColor,
+                    color: props.textColor ?? defaultTextColor,
+                    'border': '1px solid #eeeeee',
+                    'border-radius': '4px',
+                    'padding': '8px',
+                    'width': '100%',
+                }}
+            
             />
             <SendButton sendButtonColor={props.sendButtonColor} type='button' isDisabled={inputValue() === ''} class='my-2 ml-2' on:click={submit}>
                 <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
             </SendButton>
         </div>
+       </div> 
     )
 }
