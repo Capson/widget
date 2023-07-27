@@ -16,7 +16,7 @@ export type BotProps = {
     poweredByTextColor?: string;
     badgeBackgroundColor?: string;
     fontSize?: number;
-    startMsg?: string;
+    yoyo?: string;
 };
 export declare const Bot: (props: BotProps & {
     class?: string;

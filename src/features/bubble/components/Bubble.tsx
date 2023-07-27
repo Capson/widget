@@ -81,9 +81,8 @@ export const Bubble = (props: BubbleProps) => {
             >
                 <Show when={isBotStarted()}>
 
-                        startMsg={props.startMsg}
                     <Bot
-                       
+                        yoyo={props.startMsg}
                         badgeBackgroundColor={bubbleProps.theme?.chatWindow?.backgroundColor}
                         welcomeMessage={bubbleProps.theme?.chatWindow?.welcomeMessage}
                         poweredByTextColor={bubbleProps.theme?.chatWindow?.poweredByTextColor}
