@@ -49,11 +49,11 @@ export const Bubble = (props: BubbleProps) => {
             <style>{styles}</style>
             <Show when={!isButtonClicked() && isMessageVisible()}>
                 <div 
-                    class="fixed flex items-center justify-between bg-white border-gray-300 border-2 rounded p-2 shadow-md"
+                    class="fixed flex items-center justify-between bg-white border-gray-100 border rounded p-2 shadow-md"
                     style={buttonPosition()}
                 >
                     Hello, welcome to Cloozo 👋. How can we assist you today 😃
-                    <svg onClick={removeMessage} class="h-6 w-6 ml-2 mt-2 cursor-pointer absolute right-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://img.icons8.com/material-outlined/24/cancel--v1.png">
+                    <svg onClick={removeMessage} class="h-6 w-6 ml-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://img.icons8.com/material-outlined/24/cancel--v1.png" style={{position: 'absolute', right: '-30px'}}>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </div>
