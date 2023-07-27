@@ -9,7 +9,7 @@ export type BubbleProps = BotProps & BubbleParams & { notificationMessage?: stri
 export const Bubble = (props: BubbleProps) => {
 
     const defaultMessage = "Hello, default message!❤️";
-    const startMsg = props.notificationMessage || defaultMessage;
+    const notificationMessage = props.notificationMessage || defaultMessage;
 
 
     const [bubbleProps] = splitProps(props, ['theme'])
@@ -56,7 +56,7 @@ export const Bubble = (props: BubbleProps) => {
                     style={buttonPosition()}
                 >
 
-                    {startMsg}
+                    {notificationMessage}
                     <svg onClick={removeMessage} class="h-6 w-6 ml-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://img.icons8.com/material-outlined/24/cancel--v1.png" style={{position: 'absolute', right: '-30px'}}>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
