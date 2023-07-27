@@ -4,7 +4,7 @@ import { BubbleButton } from './BubbleButton'
 import { BubbleParams } from '../types'
 import { Bot, BotProps } from '../../../components/Bot'
 
-export type BubbleProps = BotProps & BubbleParams
+export type BubbleProps = BotProps & BubbleParams & { startMsg: string }
 
 export const Bubble = (props: BubbleProps) => {
 
@@ -52,7 +52,7 @@ export const Bubble = (props: BubbleProps) => {
                     class="fixed flex items-center justify-between bg-white border-gray-100 border rounded p-2 shadow-md"
                     style={buttonPosition()}
                 >
-                    Hello, welcome to Cloozo 👋. How can we assist you today 😃
+                    {props.startMsg}
                     <svg onClick={removeMessage} class="h-6 w-6 ml-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://img.icons8.com/material-outlined/24/cancel--v1.png" style={{position: 'absolute', right: '-30px'}}>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
