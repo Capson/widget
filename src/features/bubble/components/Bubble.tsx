@@ -7,6 +7,8 @@ import { Bot, BotProps } from '../../../components/Bot'
 export type BubbleProps = BotProps & BubbleParams
 
 export const Bubble = (props: BubbleProps) => {
+
+
     const [bubbleProps] = splitProps(props, ['theme'])
 
     const [isBotOpened, setIsBotOpened] = createSignal(false)
@@ -20,16 +22,25 @@ export const Bubble = (props: BubbleProps) => {
     const closeBot = () => {
         setIsBotOpened(false)
     }
-
+    const [isButtonClicked, setIsButtonClicked] = createSignal(false)
     const toggleBot = () => {
+        setIsButtonClicked(true)
         isBotOpened() ? closeBot() : openBot()
     }
 
     return (
         <>
             <style>{styles}</style>
+            <Show when={!isButtonClicked()}>
+                <div 
+                    class="fixed bottom-24 right-20 text-center"
+                    style={{'bottom': props.theme?.button?.size === 'large' ? '60px' : '56px'}}
+                >
+                    Hello
+                </div>
+            </Show>
             <BubbleButton {...bubbleProps.theme?.button} toggleBot={toggleBot} isBotOpened={isBotOpened()} 
-            style={{ width: '200px', height: '200px' }}
+            
             />
             <div
                 part='bot'
