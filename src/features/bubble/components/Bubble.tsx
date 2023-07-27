@@ -48,7 +48,7 @@ export const Bubble = (props: BubbleProps) => {
             if(bubbleProps.theme?.chatWindow?.welcomeMessage) {
                 setIsMessageVisible(true);
             }
-        }, 2000);
+        }, 6000);
     });
 
     return (
