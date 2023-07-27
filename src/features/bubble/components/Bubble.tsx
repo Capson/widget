@@ -23,7 +23,7 @@ export const Bubble = (props: BubbleProps) => {
         setIsBotOpened(false)
     }
     const [isButtonClicked, setIsButtonClicked] = createSignal(false)
-    const [buttonPosition, setButtonPosition] = createSignal({bottom: '400px', right: '20px'})
+    const [buttonPosition, setButtonPosition] = createSignal({bottom: '100px', right: '50px'})
 
     const toggleBot = () => {
         setIsButtonClicked(true)
