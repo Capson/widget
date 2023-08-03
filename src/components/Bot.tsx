@@ -335,10 +335,10 @@ export const Bot = (props: BotProps & { class?: string }) => {
                             )}
                         </For>
                     </div>
-                    <div class="w-full flex justify-center">
+                    <div class="w-full flex justify-center flex-wrap">
                     {predefinedQuestions.map((question) => (
                         <button 
-                            class="m-2 p-2 border rounded hover:bg-gray-200"
+                            class="m-1 p-2 border rounded hover:bg-gray-200 w-1/2"
                             onClick={() => handlePredefinedQuestionClick(question)}
                         >
                             {question}
