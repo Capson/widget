@@ -295,6 +295,16 @@ export const Bot = (props: BotProps & { class?: string }) => {
                         <For each={[...messages()]}>
                             {(message, index) => (
                                 <>
+                                {index() === 0 && <div class="w-full flex flex-wrap justify-center">
+                                    {predefinedQuestions.map((question) => (
+                                        <button 
+                                            class="m-1 p-2 border rounded hover:bg-gray-200 max-w-[45%] min-w-[45%]"
+                                            onClick={() => handlePredefinedQuestionClick(question)}
+                                        >
+                                            {question}
+                                        </button>
+                                    ))}
+                                    </div>}
                                     {message.type === 'userMessage' && (
                                         <GuestBubble
                                             message={message.message}
