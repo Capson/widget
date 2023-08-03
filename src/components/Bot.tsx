@@ -295,7 +295,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                         <For each={[...messages()]}>
                             {(message, index) => (
                                 <>
-                                       <div style={{position: 'fixed', top: '0', width: '100%', display: 'flex', justifyContent: 'center', zIndex: '1'}}>
+                                       <div style={{position: 'fixed', top: '0', width: '100%', display: 'flex', justifyContent: 'center', zIndex: '1', backgroundColor: 'lightgrey'}}>
                                         <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
                                         </div> 
                                     {message.type === 'userMessage' && (
@@ -338,7 +338,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                                 </>
                             )}
                         </For>
-                        <div class="flex justify-center mb-2">
+                        <div class="flex justify-center mb-2 overflow-x-auto whitespace-nowrap">
                         {predefinedQuestions.map((question) => (
                             <button 
                                 class="m-1 p-2 border rounded hover:bg-gray-200"
