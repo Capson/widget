@@ -285,6 +285,11 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     return (
         <>
+                       <div class="image-container">
+                                        <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
+                                        </div> 
+
+
                     <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
                     <div class="flex items-start">
                     {typeof props.chatflowConfig?.imagePath === 'string' &&
@@ -297,9 +302,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                <div class="flex w-full h-full justify-center">
                     <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
                         
-                    <div class="image-container">
-                                        <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
-                                        </div>    
+                    
 
                         <For each={[...messages()]}>
                             {(message, index) => (
