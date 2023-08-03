@@ -21,7 +21,6 @@ export type MessageType = {
 
 export type ChatflowConfig = {
     predefinedQuestions?: string[];
-    lead?: boolean;
     [key: string]: any;
 }
 
