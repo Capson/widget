@@ -287,10 +287,9 @@ export const Bot = (props: BotProps & { class?: string }) => {
         <>
 
                     <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
-                    
-                    
-                    <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
-                        
+                    <div class="image-container">
+                                        <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
+                        </div>
                     
                     <div class="flex items-start">
                     {typeof props.chatflowConfig?.imagePath === 'string' &&
