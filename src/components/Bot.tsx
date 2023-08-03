@@ -1,3 +1,4 @@
+import './styles.css';
 import { createSignal, createEffect, For, onMount } from 'solid-js'
 import { sendMessageQuery, isStreamAvailableQuery, IncomingInput } from '@/queries/sendMessageQuery'
 import { TextInput } from './inputs/textInput'
@@ -295,7 +296,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                         <For each={[...messages()]}>
                             {(message, index) => (
                                 <>
-                                       <div style={{position: 'fixed', top: '0', width: '100%', display: 'flex', justifyContent: 'center', zIndex: '1', backgroundColor: '#ffffff'}}>
+                                       <div class="image-container">
                                         <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
                                         </div> 
                                     {message.type === 'userMessage' && (
