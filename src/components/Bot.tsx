@@ -345,16 +345,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                             )}
                         </For>
                     </div>
-                    <div class="w-full flex justify-center flex-wrap">
-                    {predefinedQuestions.map((question) => (
-                        <button 
-                            class="m-1 p-2 border rounded hover:bg-gray-200 w-1/2"
-                            onClick={() => handlePredefinedQuestionClick(question)}
-                        >
-                            {question}
-                        </button>
-                    ))}
-                </div>
+                    
                     <TextInput
                         backgroundColor={props.textInput?.backgroundColor}
                         textColor={props.textInput?.textColor}
