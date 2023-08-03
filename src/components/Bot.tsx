@@ -124,6 +124,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
     let botContainer: HTMLDivElement | undefined
 
     const [showForm, setShowForm] = createSignal(false);
+    const [userInput, setUserInput] = createSignal('');
     const handleSubmit = async (value: string) => {
         setUserInput(value)
         if (props.chatflowConfig?.lead) {
