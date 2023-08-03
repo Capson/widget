@@ -290,7 +290,8 @@ export const Bot = (props: BotProps & { class?: string }) => {
                         </div>
 
 
-                    <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
+                    <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class} 
+                    style={{ height: 'calc(100% + 300px)' }}>
                     
                     
                     <div class="flex items-start">
