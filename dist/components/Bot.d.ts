@@ -8,6 +8,7 @@ export type MessageType = {
 };
 export type ChatflowConfig = {
     predefinedQuestions?: string[];
+    lead?: boolean;
     [key: string]: any;
 };
 export type BotProps = {
@@ -24,6 +25,6 @@ export type BotProps = {
 };
 export declare const Bot: (props: BotProps & {
     class?: string;
-}) => import("solid-js").JSX.Element;
+}) => void;
 export {};
 //# sourceMappingURL=Bot.d.ts.map

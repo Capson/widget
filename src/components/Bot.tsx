@@ -21,6 +21,7 @@ export type MessageType = {
 
 export type ChatflowConfig = {
     predefinedQuestions?: string[];
+    lead?: boolean;
     [key: string]: any;
 }
 
@@ -121,6 +122,16 @@ export const Bot = (props: BotProps & { class?: string }) => {
     let chatContainer: HTMLDivElement | undefined
     let bottomSpacer: HTMLDivElement | undefined
     let botContainer: HTMLDivElement | undefined
+
+    const [showForm, setShowForm] = createSignal(false);
+    const handleSubmit = async (value: string) => {
+        setUserInput(value)
+        if (props.chatflowConfig?.lead) {
+            setShowForm(true);
+        } else {
+            if (value.trim() === '') {
+                return
+            }
 
     const [userInput, setUserInput] = createSignal('')
     const [loading, setLoading] = createSignal(false)
@@ -288,6 +299,11 @@ export const Bot = (props: BotProps & { class?: string }) => {
         handleSubmit(question);
     }
 
+    const handleFormSubmit = () => {
+        // Handle form submission here...
+        setShowForm(false);
+    }
+
     return (
         <>
                     <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
@@ -370,6 +386,16 @@ export const Bot = (props: BotProps & { class?: string }) => {
                 <BottomSpacer ref={bottomSpacer} />
             </div>
             {sourcePopupOpen() && <Popup isOpen={sourcePopupOpen()} value={sourcePopupSrc()} onClose={() => setSourcePopupOpen(false)}/>}
+       
+                            
+            {showForm() && (
+            <form onSubmit={handleFormSubmit}>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <button type="submit">Submit</button>
+            </form>
+        )}             
+
         </>
     )
 }
