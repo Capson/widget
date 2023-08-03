@@ -276,7 +276,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
             }
         }
     })
-    const predefinedQuestions = ['What is Cloozo?', 'How does Cloozo work?', 'What are the benefits of using Cloozo?'];
+    const predefinedQuestions = ['What is Cloozo?', 'How does Cloozo work?', 'What are the benefits of using Cloozo?', 'Who should use this?'];
 
     const handlePredefinedQuestionClick = (question: string) => {
         handleSubmit(question);
@@ -295,9 +295,9 @@ export const Bot = (props: BotProps & { class?: string }) => {
                         <For each={[...messages()]}>
                             {(message, index) => (
                                 <>
-                                {message.type === 'apiMessage' && index() === 0 && (
-                                       <div class="text-center mb-4"><img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/></div> 
-                                    )}
+                                       <div style={{position: 'fixed', top: '0', width: '100%', display: 'flex', justifyContent: 'center', zIndex: '1'}}>
+                                        <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
+                                        </div> 
                                     {message.type === 'userMessage' && (
                                         <GuestBubble
                                             message={message.message}
