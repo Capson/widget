@@ -287,11 +287,6 @@ export const Bot = (props: BotProps & { class?: string }) => {
         <>
                     <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
                     
-                    
-                    <div class="image-container">
-                                        <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '100px', height: '50px'}}/>
-                        </div>
-
                      
 
                <div class="flex w-full h-full justify-center">
