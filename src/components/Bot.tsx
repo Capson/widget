@@ -296,7 +296,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                             {(message, index) => (
                                 <>
                                 {message.type === 'apiMessage' && index() === 0 && (
-                                        <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '50px'}}/>
+                                       <div class="text-center mb-4"><img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '50px'}}/></div> 
                                     )}
                                     {message.type === 'userMessage' && (
                                         <GuestBubble
