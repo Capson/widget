@@ -19,6 +19,11 @@ export type MessageType = {
     sourceDocuments?: any
 }
 
+export type ChatflowConfig = {
+    predefinedQuestions?: string[];
+    [key: string]: any;
+}
+
 export type BotProps = {
     chatflowid: string
     apiHost?: string
@@ -277,7 +282,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
             }
         }
     })
-    const predefinedQuestions = ['What is Cloozo?', 'How does Cloozo work?', 'What are the benefits of using Cloozo?', 'Who should use this?'];
+    const predefinedQuestions = props.chatflowConfig?.predefinedQuestions;
 
     const handlePredefinedQuestionClick = (question: string) => {
         handleSubmit(question);
@@ -287,7 +292,8 @@ export const Bot = (props: BotProps & { class?: string }) => {
         <>
                     <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
                     
-                     
+                    
+               
 
                <div class="flex w-full h-full justify-center">
                     <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
