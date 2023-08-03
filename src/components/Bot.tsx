@@ -295,7 +295,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                         <For each={[...messages()]}>
                             {(message, index) => (
                                 <>
-                                       <div style={{position: 'fixed', top: '0', width: '100%', display: 'flex', justifyContent: 'center', zIndex: '1', backgroundColor: '#D3D3D3'}}>
+                                       <div style={{position: 'fixed', top: '0', width: '100%', display: 'flex', justifyContent: 'center', zIndex: '1', backgroundColor: '#ffffff'}}>
                                         <img src="https://i.ibb.co/5LyLXk5/ddd.png" alt="Your Alt Text" style={{width: '200px', height: '100px'}}/>
                                         </div> 
                                     {message.type === 'userMessage' && (
