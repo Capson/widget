@@ -6,6 +6,10 @@ export type MessageType = {
     type: messageType;
     sourceDocuments?: any;
 };
+export type ChatflowConfig = {
+    predefinedQuestions?: string[];
+    [key: string]: any;
+};
 export type BotProps = {
     chatflowid: string;
     apiHost?: string;
@@ -17,7 +21,6 @@ export type BotProps = {
     poweredByTextColor?: string;
     badgeBackgroundColor?: string;
     fontSize?: number;
-    webhookUrl?: string;
 };
 export declare const Bot: (props: BotProps & {
     class?: string;

@@ -1,6 +1,4 @@
 import './styles.css';
-import axios from 'axios';
-
 import { createSignal, createEffect, For, onMount } from 'solid-js'
 import { sendMessageQuery, isStreamAvailableQuery, IncomingInput } from '@/queries/sendMessageQuery'
 import { TextInput } from './inputs/textInput'
@@ -21,6 +19,11 @@ export type MessageType = {
     sourceDocuments?: any
 }
 
+export type ChatflowConfig = {
+    predefinedQuestions?: string[];
+    [key: string]: any;
+}
+
 export type BotProps = {
     chatflowid: string
     apiHost?: string
@@ -32,7 +35,6 @@ export type BotProps = {
     poweredByTextColor?: string
     badgeBackgroundColor?: string
     fontSize?: number
-    webhookUrl?: string
     
 }
 
@@ -181,7 +183,6 @@ export const Bot = (props: BotProps & { class?: string }) => {
     // Handle form submission
     const handleSubmit = async (value: string) => {
         setUserInput(value)
-        
 
         if (value.trim() === '') {
             return
@@ -199,19 +200,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
         if (props.chatflowConfig) body.overrideConfig = props.chatflowConfig
 
-        if (isChatFlowAvailableToStream()) body.socketIOClientId = socketIOClientId();
-        // Check if the message contains "talk to agent"
-            const shouldPassToWebhook = value.toLowerCase().includes('talk to agent');
-
-            // Make a POST request to the webhook URL with the user's message
-            try {
-                if (shouldPassToWebhook && props.webhookUrl) {
-                await axios.post(props.webhookUrl, { message: value });
-                }
-            } catch (error) {
-                handleError('Error occurred while sending the message to the webhook.');
-                return;
-            }
+        if (isChatFlowAvailableToStream()) body.socketIOClientId = socketIOClientId()
 
         const { data, error } = await sendMessageQuery({
             chatflowid: props.chatflowid,
@@ -293,7 +282,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
             }
         }
     })
-    const predefinedQuestions = ['What is Cloozo?', 'How does Cloozo work?', 'What are the benefits of using Cloozo?', 'Who should use this?'];
+    const predefinedQuestions = props.chatflowConfig?.predefinedQuestions;
 
     const handlePredefinedQuestionClick = (question: string) => {
         handleSubmit(question);
@@ -303,7 +292,8 @@ export const Bot = (props: BotProps & { class?: string }) => {
         <>
                     <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
                     
-                     
+                    
+               
 
                <div class="flex w-full h-full justify-center">
                     <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
