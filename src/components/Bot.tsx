@@ -118,10 +118,12 @@ export const Bot = (props: BotProps & { class?: string }) => {
     if (value.toLowerCase() === 'Talk to agent') {
       // Send the user's message to the webhook
       try {
-        await axios.post('https://h.albato.com/wh/38/1lftdla/tBILDfeFw8hWdIdv-jiQtR54yyBtNyypqnNRYzylVas/', { message: value });
+        await sendToWebhook(value);
       } catch (error) {
         console.error('Webhook request failed:', error);
         // Handle webhook error here if needed
+        handleError('Failed to send message to webhook');
+        return;
       }
     } else {
       // Send user question and history to API
@@ -163,6 +165,15 @@ export const Bot = (props: BotProps & { class?: string }) => {
         handleError(errorData);
         return;
       }
+    }
+  };
+
+  // Send user's message to the webhook
+  const sendToWebhook = async (message: string) => {
+    try {
+      await axios.post('https://h.albato.com/wh/38/1lftdla/tBILDfeFw8hWdIdv-jiQtR54yyBtNyypqnNRYzylVas/', { message });
+    } catch (error) {
+      throw error;
     }
   };
 
@@ -271,7 +282,6 @@ export const Bot = (props: BotProps & { class?: string }) => {
                 </>
               )}
             </For>
-
             <div class="flex justify-start mb-2 overflow-x-auto whitespace-nowrap">
               {predefinedQuestions.map((question) => (
                 <button
@@ -283,7 +293,6 @@ export const Bot = (props: BotProps & { class?: string }) => {
               ))}
             </div>
           </div>
-
           <TextInput
             backgroundColor={props.textInput?.backgroundColor}
             textColor={props.textInput?.textColor}
