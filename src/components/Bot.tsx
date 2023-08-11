@@ -262,41 +262,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                   ))}
               </div>
           </div>
-          {!hasSentFirstMessage() && (
-              <div class="max-w-sm bg-white border border-gray-300 p-4 shadow rounded">
-                  <div class="mb-4">
-                      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                          Email
-                      </label>
-                      <input
-                          class="w-full px-3 py-2 border border-gray-300 rounded"
-                          type="email"
-                          id="email"
-                          value={userInput()}
-                          onChange={(e) => setUserInput(e.target.value)}
-                      />
-                  </div>
-                  <div class="mb-4">
-                      <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                          Name
-                      </label>
-                      <input
-                          class="w-full px-3 py-2 border border-gray-300 rounded"
-                          type="text"
-                          id="name"
-                          value={userInput()}
-                          onChange={(e) => setUserInput(e.target.value)}
-                      />
-                  </div>
-                  <button
-                      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                      type="submit"
-                      onClick={() => handleSubmit(userInput())}
-                  >
-                      Submit
-                  </button>
-              </div>
-          )}
+          
           <Badge badgeBackgroundColor={props.badgeBackgroundColor} poweredByTextColor={props.poweredByTextColor} botContainer={botContainer} />
           <BottomSpacer ref={bottomSpacer} />
       </div>
