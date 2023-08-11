@@ -1,5 +1,4 @@
 import './styles.css';
-import axios from 'axios';
 import { createSignal, createEffect, For, onMount } from 'solid-js'
 import { sendMessageQuery, isStreamAvailableQuery, IncomingInput } from '@/queries/sendMessageQuery'
 import { TextInput } from './inputs/textInput'
@@ -201,15 +200,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
         if (props.chatflowConfig) body.overrideConfig = props.chatflowConfig
 
-        if (isChatFlowAvailableToStream()) body.socketIOClientId = socketIOClientId();
-                // Make a POST request to the webhook URL with the user's message
-            try {
-                await axios.post('https://h.albato.com/wh/38/1lftdla/tBILDfeFw8hWdIdv-jiQtR54yyBtNyypqnNRYzylVas/', { message: value });
-            } catch (error) {
-                handleError('Error occurred while sending the message to the webhook.');
-                return;
-            }
-
+        if (isChatFlowAvailableToStream()) body.socketIOClientId = socketIOClientId()
 
         const { data, error } = await sendMessageQuery({
             chatflowid: props.chatflowid,
