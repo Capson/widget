@@ -19,11 +19,6 @@ export type MessageType = {
     sourceDocuments?: any
 }
 
-export type ChatflowConfig = {
-    predefinedQuestions?: string[];
-    [key: string]: any;
-}
-
 export type BotProps = {
     chatflowid: string
     apiHost?: string
@@ -56,8 +51,6 @@ export const Bot = (props: BotProps & { class?: string }) => {
     ], { equals: false })
     const [socketIOClientId, setSocketIOClientId] = createSignal('')
     const [isChatFlowAvailableToStream, setIsChatFlowAvailableToStream] = createSignal(false)
-    const [email, setEmail] = createSignal('')
-    const [name, setName] = createSignal('')
     const [hasSentFirstMessage, setHasSentFirstMessage] = createSignal(false);
 
     onMount(() => {
@@ -107,21 +100,10 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     // Handle form submission
     const handleSubmit = async (value: string) => {
-        setUserInput(value)
+        setUserInput(value);
 
         if (!hasSentFirstMessage()) {
             setHasSentFirstMessage(true);
-            setEmail(value);
-            setName(value);
-
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                { message: 'Welcome! Please provide your email and name.', type: 'apiMessage' },
-            ]);
-
-            setUserInput('');
-            scrollToBottom();
-            
             return;
         }
 
@@ -225,58 +207,106 @@ export const Bot = (props: BotProps & { class?: string }) => {
     }
 
     return (
-        <>
-            {hasSentFirstMessage() ? (
       <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
-        {/* Rest of the code... */}
-      </div>
-    ) : null}
-
-    {hasSentFirstMessage() ? null : (
-      <div class="flex justify-center items-center h-full">
-        <div class="max-w-sm bg-white border border-gray-300 p-4 shadow rounded">
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-              Email
-            </label>
-            <input
-              class="w-full px-3 py-2 border border-gray-300 rounded"
-              type="email"
-              id="email"
-              value={userInput()}
-              onChange={(e) => setUserInput(e.target.value)}
-            />
+          <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
+              <For each={[...messages()]}>
+                  {(message, index) => (
+                      <>
+                          {message.type === 'userMessage' && (
+                              <GuestBubble
+                                  message={message.message}
+                                  backgroundColor={props.userMessage?.backgroundColor}
+                                  textColor={props.userMessage?.textColor}
+                                  showAvatar={props.userMessage?.showAvatar}
+                                  avatarSrc={props.userMessage?.avatarSrc}
+                              />
+                          )}
+                          {message.type === 'apiMessage' && (
+                              <BotBubble
+                                  message={message.message}
+                                  backgroundColor={props.botMessage?.backgroundColor}
+                                  textColor={props.botMessage?.textColor}
+                                  showAvatar={props.botMessage?.showAvatar}
+                                  avatarSrc={props.botMessage?.avatarSrc}
+                              />
+                          )}
+                          {message.type === 'userMessage' && loading() && index() === messages().length - 1 && (
+                              <LoadingBubble />
+                          )}
+                          {message.sourceDocuments && message.sourceDocuments.length &&
+                              <div style={{ display: 'flex', "flex-direction": 'row', width: '100%' }}>
+                                  <For each={[...message.sourceDocuments]}>
+                                      {(src) => (
+                                          <SourceBubble
+                                              pageContent={src.pageContent}
+                                              metadata={src.metadata}
+                                              onSourceClick={() => {
+                                                  setSourcePopupSrc(src);
+                                                  setSourcePopupOpen(true);
+                                              }}
+                                          />
+                                      )}
+                                  </For>
+                              </div>}
+                      </>
+                  )}
+              </For>
+              <div class="flex justify-start mb-2 overflow-x-auto whitespace-nowrap">
+                  {predefinedQuestions.map((question) => (
+                      <button 
+                          class="m-1 p-2 border rounded hover:bg-gray-200"
+                          onClick={() => handlePredefinedQuestionClick(question)}
+                      >
+                          {question}
+                      </button>
+                  ))}
+              </div>
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-              Name
-            </label>
-            <input
-              class="w-full px-3 py-2 border border-gray-300 rounded"
-              type="text"
-              id="name"
-              value={userInput()}
-              onChange={(e) => setUserInput(e.target.value)}
-            />
-          </div>
-          <button
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-            onClick={() => handleSubmit(userInput())}
-          >
-            Submit
-          </button>
-        </div>
+          {!hasSentFirstMessage() && (
+              <div class="max-w-sm bg-white border border-gray-300 p-4 shadow rounded">
+                  <div class="mb-4">
+                      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                          Email
+                      </label>
+                      <input
+                          class="w-full px-3 py-2 border border-gray-300 rounded"
+                          type="email"
+                          id="email"
+                          value={userInput()}
+                          onChange={(e) => setUserInput(e.target.value)}
+                      />
+                  </div>
+                  <div class="mb-4">
+                      <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                          Name
+                      </label>
+                      <input
+                          class="w-full px-3 py-2 border border-gray-300 rounded"
+                          type="text"
+                          id="name"
+                          value={userInput()}
+                          onChange={(e) => setUserInput(e.target.value)}
+                      />
+                  </div>
+                  <button
+                      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                      type="submit"
+                      onClick={() => handleSubmit(userInput())}
+                  >
+                      Submit
+                  </button>
+              </div>
+          )}
+          <Badge badgeBackgroundColor={props.badgeBackgroundColor} poweredByTextColor={props.poweredByTextColor} botContainer={botContainer} />
+          <BottomSpacer ref={bottomSpacer} />
       </div>
-    )}
-  </>
-        )
+  )
 }
 
 type BottomSpacerProps = {
-    ref: HTMLDivElement | undefined
+  ref: HTMLDivElement | undefined
 }
 
 const BottomSpacer = (props: BottomSpacerProps) => {
-    return <div ref={props.ref} class="w-full h-32" />
+  return <div ref={props.ref} class="w-full h-32" />
 }
