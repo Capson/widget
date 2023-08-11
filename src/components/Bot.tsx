@@ -100,13 +100,6 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     // Handle form submission
     const handleSubmit = async (value: string) => {
-        setUserInput(value);
-
-        if (!hasSentFirstMessage()) {
-            setHasSentFirstMessage(true);
-            return;
-        }
-
         setLoading(true)
         setMessages((prevMessages) => [...prevMessages, { message: value, type: 'userMessage' }])
         scrollToBottom()
@@ -262,7 +255,24 @@ export const Bot = (props: BotProps & { class?: string }) => {
                   ))}
               </div>
           </div>
-          
+          {!hasSentFirstMessage() && (
+              <div class="max-w-sm bg-white border border-gray-300 p-4 shadow rounded">
+                  <input
+                      class="w-full px-3 py-2 border border-gray-300 rounded"
+                      type="text"
+                      value={userInput()}
+                      onChange={(e) => setUserInput(e.target.value)}
+                      placeholder="Type your message..."
+                  />
+                  <button
+                      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-2"
+                      type="submit"
+                      onClick={() => handleSubmit(userInput())}
+                  >
+                      Send
+                  </button>
+              </div>
+          )}
           <Badge badgeBackgroundColor={props.badgeBackgroundColor} poweredByTextColor={props.poweredByTextColor} botContainer={botContainer} />
           <BottomSpacer ref={bottomSpacer} />
       </div>
