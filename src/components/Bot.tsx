@@ -1,4 +1,6 @@
 import './styles.css';
+import axios from 'axios';
+
 import { createSignal, createEffect, For, onMount } from 'solid-js'
 import { sendMessageQuery, isStreamAvailableQuery, IncomingInput } from '@/queries/sendMessageQuery'
 import { TextInput } from './inputs/textInput'
@@ -17,11 +19,6 @@ export type MessageType = {
     message: string
     type: messageType,
     sourceDocuments?: any
-}
-
-export type ChatflowConfig = {
-    predefinedQuestions?: string[];
-    [key: string]: any;
 }
 
 export type BotProps = {
@@ -183,6 +180,12 @@ export const Bot = (props: BotProps & { class?: string }) => {
     // Handle form submission
     const handleSubmit = async (value: string) => {
         setUserInput(value)
+        try {
+            await axios.post('https://h.albato.com/wh/38/1lftdla/tBILDfeFw8hWdIdv-jiQtR54yyBtNyypqnNRYzylVas/', { message: value });
+          } catch (error) {
+            handleError('Error occurred while sending the message to the webhook.');
+            return;
+          }
 
         if (value.trim() === '') {
             return
@@ -282,7 +285,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
             }
         }
     })
-    const predefinedQuestions = props.chatflowConfig?.predefinedQuestions;
+    const predefinedQuestions = ['What is Cloozo?', 'How does Cloozo work?', 'What are the benefits of using Cloozo?', 'Who should use this?'];
 
     const handlePredefinedQuestionClick = (question: string) => {
         handleSubmit(question);
@@ -292,8 +295,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
         <>
                     <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
                     
-                    
-               
+                     
 
                <div class="flex w-full h-full justify-center">
                     <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
