@@ -118,7 +118,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
     if (value.toLowerCase() === 'Talk to agent') {
       // Send the user's message to the webhook
       try {
-        await axios.post('https://your-webhook-url.com', { message: value });
+        await axios.post('https://h.albato.com/wh/38/1lftdla/tBILDfeFw8hWdIdv-jiQtR54yyBtNyypqnNRYzylVas/', { message: value });
       } catch (error) {
         console.error('Webhook request failed:', error);
         // Handle webhook error here if needed
