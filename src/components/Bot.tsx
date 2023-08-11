@@ -58,6 +58,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
     const [isChatFlowAvailableToStream, setIsChatFlowAvailableToStream] = createSignal(false)
     const [email, setEmail] = createSignal('')
     const [name, setName] = createSignal('')
+    const [hasSentFirstMessage, setHasSentFirstMessage] = createSignal(false);
 
     onMount(() => {
         if (!bottomSpacer) return
@@ -108,25 +109,19 @@ export const Bot = (props: BotProps & { class?: string }) => {
     const handleSubmit = async (value: string) => {
         setUserInput(value)
 
-        if (value.trim() === '') {
-            return
-        }
-
-        if (email() === '' || name() === '') {
-            // Store the user's email and name
+        if (!hasSentFirstMessage()) {
+            setHasSentFirstMessage(true);
             setEmail(value);
             setName(value);
 
-            // Show a welcome message with a form for email and name input
             setMessages((prevMessages) => [
                 ...prevMessages,
                 { message: 'Welcome! Please provide your email and name.', type: 'apiMessage' },
             ]);
 
-            // Clear the user input
             setUserInput('');
             scrollToBottom();
-
+            
             return;
         }
 
@@ -231,21 +226,45 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     return (
         <>
-            {(email() === '' || name() === '') && (
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Email:
-                        <input type="email" value={userInput()} onChange={(e) => setUserInput(e.target.value)} />
-                    </label>
-                    <label>
-                        Name:
-                        <input type="text" value={userInput()} onChange={(e) => setUserInput(e.target.value)} />
-                    </label>
-                    <button type="submit">Submit</button>
-                </form>
+            {!hasSentFirstMessage() && (
+                <div class="flex justify-center items-center h-full">
+                    <div class="max-w-sm bg-white border border-gray-300 p-4 shadow rounded">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                Email
+                            </label>
+                            <input
+                                class="w-full px-3 py-2 border border-gray-300 rounded"
+                                type="email"
+                                id="email"
+                                value={userInput()}
+                                onChange={(e) => setUserInput(e.target.value)}
+                            />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                                Name
+                            </label>
+                            <input
+                                class="w-full px-3 py-2 border border-gray-300 rounded"
+                                type="text"
+                                id="name"
+                                value={userInput()}
+                                onChange={(e) => setUserInput(e.target.value)}
+                            />
+                        </div>
+                        <button
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                            type="submit"
+                            onClick={() => handleSubmit(userInput())}
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </div>
             )}
-            
-            {email() !== '' && name() !== '' && (
+
+            {hasSentFirstMessage() && (
                 <div ref={botContainer} class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}>
                     <div class="flex w-full h-full justify-center">
                         <div style={{ "padding-bottom": '100px' }} ref={chatContainer} class="overflow-y-scroll min-w-full w-full min-h-full px-3 pt-10 relative scrollable-container chatbot-chat-view scroll-smooth">
