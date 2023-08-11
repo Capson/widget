@@ -17,6 +17,7 @@ export type BotProps = {
     poweredByTextColor?: string;
     badgeBackgroundColor?: string;
     fontSize?: number;
+    webhookUrl?: string;
 };
 export declare const Bot: (props: BotProps & {
     class?: string;

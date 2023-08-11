@@ -32,6 +32,7 @@ export type BotProps = {
     poweredByTextColor?: string
     badgeBackgroundColor?: string
     fontSize?: number
+    webhookUrl?: string
     
 }
 
@@ -180,12 +181,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
     // Handle form submission
     const handleSubmit = async (value: string) => {
         setUserInput(value)
-        try {
-            await axios.post('https://h.albato.com/wh/38/1lftdla/tBILDfeFw8hWdIdv-jiQtR54yyBtNyypqnNRYzylVas/', { message: value });
-          } catch (error) {
-            handleError('Error occurred while sending the message to the webhook.');
-            return;
-          }
+        
 
         if (value.trim() === '') {
             return
@@ -203,7 +199,19 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
         if (props.chatflowConfig) body.overrideConfig = props.chatflowConfig
 
-        if (isChatFlowAvailableToStream()) body.socketIOClientId = socketIOClientId()
+        if (isChatFlowAvailableToStream()) body.socketIOClientId = socketIOClientId();
+        // Check if the message contains "talk to agent"
+            const shouldPassToWebhook = value.toLowerCase().includes('talk to agent');
+
+            // Make a POST request to the webhook URL with the user's message
+            try {
+                if (shouldPassToWebhook && props.webhookUrl) {
+                await axios.post(props.webhookUrl, { message: value });
+                }
+            } catch (error) {
+                handleError('Error occurred while sending the message to the webhook.');
+                return;
+            }
 
         const { data, error } = await sendMessageQuery({
             chatflowid: props.chatflowid,
