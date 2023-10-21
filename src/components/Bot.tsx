@@ -234,23 +234,25 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
 
     createEffect(() => {
-        const webhookUrl = "https://cloud.activepieces.com/api/v1/webhooks/Olr1YI1Jvx2iuJ77yC13N";
+        if (userInput() === 'End this chat') {
+            const webhookUrl = "https://cloud.activepieces.com/api/v1/webhooks/Olr1YI1Jvx2iuJ77yC13N";
 
-        fetch(webhookUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(messages()),
-        })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(messages()),
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("HTTP error " + response.status);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
     });
 
     // Auto scroll chat to bottom
