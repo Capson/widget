@@ -258,7 +258,10 @@ export const Bot = (props: BotProps & { class?: string }) => {
                 console.log(error);
             });
 
-            lastSentMessageIndex = messages().length - 1;
+            const lastMessage = messages()[messages().length - 1];
+            if (lastMessage.type === "apiMessage") {
+                lastSentMessageIndex = messages().length - 1;
+            }
         }
     });
 
