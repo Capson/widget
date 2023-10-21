@@ -236,9 +236,12 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     // Send updated chat history to webhook when a new message is added
     createEffect(() => {
-        const newMessages = messages().slice(-2);
+        const messagesLength = messages().length;
 
-        if (newMessages.length > 0) {
+        if (messagesLength >= 2) {
+            const userMessage = messages()[messagesLength - 2];
+            const botResponse = messages()[messagesLength - 1];
+
             const webhookUrl = "https://cloud.activepieces.com/api/v1/webhooks/Olr1YI1Jvx2iuJ77yC13N";
 
             fetch(webhookUrl, {
@@ -246,18 +249,22 @@ export const Bot = (props: BotProps & { class?: string }) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(newMessages),
+                body: JSON.stringify([userMessage, botResponse]),
             })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("HTTP error " + response.status);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("HTTP error " + response.status);
+                    }
+
+                    // Reset chat history
+                    setMessages([]);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     });
+
 
     // Auto scroll chat to bottom
     createEffect(() => {
