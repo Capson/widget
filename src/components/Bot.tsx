@@ -238,7 +238,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
     // Send updated chat history to webhook when a new message is added
     createEffect(() => {
         if (userInput() === 'End this chat') {
-            const webhookUrl = "https://app.cloozo.com/version-test/api/1.1/wf/chat_history";
+            const webhookUrl = "https://chatbot-94576.bubbleapps.io/version-test/api/1.1/wf/chat_history/initialize";
 
             fetch(webhookUrl, {
                 method: "POST",
