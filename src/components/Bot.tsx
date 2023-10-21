@@ -117,7 +117,7 @@ const defaultWelcomeMessage = 'Hello. How can we help you?'
     },
 ]*/
 
-export const Bot = (props: BotProps & { class?: string }) => {
+export const Bot = (props: BotProps & { class?: string, id?:string }) => {
     let chatContainer: HTMLDivElement | undefined
     let bottomSpacer: HTMLDivElement | undefined
     let botContainer: HTMLDivElement | undefined
@@ -239,12 +239,17 @@ export const Bot = (props: BotProps & { class?: string }) => {
         if (userInput() === 'End this chat') {
             const webhookUrl = "https://chatbot-94576.bubbleapps.io/version-test/api/1.1/wf/chat_history/initialize";
 
+            const payload = {
+                messages: messages(),
+                id: props.id // Access the id prop here
+            };
+
             fetch(webhookUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(messages()),
+                body: JSON.stringify(payload),
             })
             .then((response) => {
                 if (!response.ok) {

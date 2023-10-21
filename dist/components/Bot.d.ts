@@ -24,6 +24,7 @@ export type BotProps = {
 };
 export declare const Bot: (props: BotProps & {
     class?: string;
+    id?: string;
 }) => import("solid-js").JSX.Element;
 export {};
 //# sourceMappingURL=Bot.d.ts.map
