@@ -35,6 +35,7 @@ export type BotProps = {
     poweredByTextColor?: string
     badgeBackgroundColor?: string
     fontSize?: number
+    id?: string
     
 }
 
@@ -117,7 +118,7 @@ const defaultWelcomeMessage = 'Hello. How can we help you?'
     },
 ]*/
 
-export const Bot = (props: BotProps & { class?: string, id?:string }) => {
+export const Bot = (props: BotProps & { class?: string }) => {
     let chatContainer: HTMLDivElement | undefined
     let bottomSpacer: HTMLDivElement | undefined
     let botContainer: HTMLDivElement | undefined
