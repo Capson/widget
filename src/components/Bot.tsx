@@ -236,35 +236,26 @@ export const Bot = (props: BotProps & { class?: string }) => {
 
     // Send updated chat history to webhook when a new message is added
     createEffect(() => {
-        const messagesLength = messages().length;
-
-        if (messagesLength >= 2) {
-            const userMessage = messages()[messagesLength - 2];
-            const botResponse = messages()[messagesLength - 1];
-
-            const webhookUrl = "https://cloud.activepieces.com/api/v1/webhooks/Olr1YI1Jvx2iuJ77yC13N";
+        if (userInput() === 'End this chat') {
+            const webhookUrl = "https://chatbot-94576.bubbleapps.io/version-test/api/1.1/wf/chat_history/initialize";
 
             fetch(webhookUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify([userMessage, botResponse]),
+                body: JSON.stringify(messages()),
             })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("HTTP error " + response.status);
-                    }
-
-                    // Reset chat history
-                    setMessages([]);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("HTTP error " + response.status);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         }
     });
-
 
     // Auto scroll chat to bottom
     createEffect(() => {
