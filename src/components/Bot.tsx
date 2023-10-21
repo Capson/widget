@@ -240,7 +240,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
         const newMessages = messages().slice(lastSentMessageIndex + 1);
 
         if (newMessages.length > 0) {
-            const webhookUrl = "https://example.com/webhook";
+            const webhookUrl = "https://cloud.activepieces.com/api/v1/webhooks/Olr1YI1Jvx2iuJ77yC13N";
 
             fetch(webhookUrl, {
                 method: "POST",
