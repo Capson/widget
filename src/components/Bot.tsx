@@ -233,8 +233,13 @@ export const Bot = (props: BotProps & { class?: string }) => {
     }
 
 
+    let lastSentMessageIndex = -1;
+
+    // Send updated chat history to webhook when a new message is added
     createEffect(() => {
-        if (userInput() === 'End this chat') {
+        const newMessages = messages().slice(lastSentMessageIndex + 1);
+
+        if (newMessages.length > 0) {
             const webhookUrl = "https://cloud.activepieces.com/api/v1/webhooks/Olr1YI1Jvx2iuJ77yC13N";
 
             fetch(webhookUrl, {
@@ -242,7 +247,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(messages()),
+                body: JSON.stringify(newMessages),
             })
             .then((response) => {
                 if (!response.ok) {
@@ -252,6 +257,8 @@ export const Bot = (props: BotProps & { class?: string }) => {
             .catch((error) => {
                 console.log(error);
             });
+
+            lastSentMessageIndex = messages().length - 1;
         }
     });
 
