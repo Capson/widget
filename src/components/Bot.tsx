@@ -238,19 +238,14 @@ export const Bot = (props: BotProps & { class?: string }) => {
     // Send updated chat history to webhook when a new message is added
     createEffect(() => {
         if (userInput() === 'End this chat') {
-            const webhookUrl = "https://chatbot-94576.bubbleapps.io/version-test/api/1.1/wf/chat_history/initialize";
-
-            const payload = {
-                messages: messages(),
-                id: props.id // Access the id prop here
-            };
+            const webhookUrl = "https://app.cloozo.com/version-test/api/1.1/wf/chat_history";
 
             fetch(webhookUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(payload),
+                body: JSON.stringify(messages()),
             })
             .then((response) => {
                 if (!response.ok) {
