@@ -9,24 +9,7 @@ export const Full = (
   props: FullProps,
   { element }: { element: HTMLElement }
 ) => {
-  const [isBotDisplayed, setIsBotDisplayed] = createSignal(false)
-
-  const launchBot = () => {
-    setIsBotDisplayed(true)
-  }
-
-  const botLauncherObserver = new IntersectionObserver((intersections) => {
-    if (intersections.some((intersection) => intersection.isIntersecting))
-      launchBot()
-  })
-
-  onMount(() => {
-    botLauncherObserver.observe(element)
-  })
-
-  onCleanup(() => {
-    botLauncherObserver.disconnect()
-  })
+  const [isBotDisplayed] = createSignal(true)
 
   return (
     <>
