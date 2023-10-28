@@ -2,6 +2,8 @@ import { onCleanup, onMount } from 'solid-js'
 
 type Props = {
   botContainer: HTMLDivElement | undefined
+  poweredByText?: string // New prop for dynamically passing the text
+  poweredByHref?: string // New prop for dynamically passing the href
   poweredByTextColor?: string
   badgeBackgroundColor?: string
 }
@@ -54,14 +56,14 @@ export const Badge = (props: Props) => {
     }}>Powered by 
       <a
         ref={liteBadge}
-        href={'https://cloozo.com'}
+        href={props.poweredByHref ?? 'https://cloozo.com'}
         target="_blank"
         rel="noopener noreferrer"
         class="lite-badge"
         id="lite-badge"
         style={{ "font-weight": 'bold', color: props.poweredByTextColor ?? defaultTextColor }}
       >
-        <span> cloozo.com</span>
+        <span>{props.poweredByText ?? 'cloozo.com'}</span>
       </a>
     </span>
   )

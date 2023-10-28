@@ -1,5 +1,7 @@
 type Props = {
     botContainer: HTMLDivElement | undefined;
+    poweredByText?: string;
+    poweredByHref?: string;
     poweredByTextColor?: string;
     badgeBackgroundColor?: string;
 };
